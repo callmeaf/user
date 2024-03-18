@@ -7,6 +7,11 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
 {
+    public function __construct($resource,protected array|int $only = [])
+    {
+        parent::__construct($resource);
+    }
+
     /**
      * Transform the resource collection into an array.
      *

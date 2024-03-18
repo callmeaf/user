@@ -51,6 +51,6 @@ class User extends Authenticatable implements HasEnum
 
     public static function enumsLang(): array
     {
-        return __('callmeaf_user::enums');
+        return __('callmeaf-user::enums');
     }
 }

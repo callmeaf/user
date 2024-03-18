@@ -13,7 +13,7 @@ class CallmeafUserServiceProvider extends ServiceProvider
     private const DATABASE_DIR = __DIR__ . '/../database';
     private const DATABASE_GROUPS = 'callmeaf-user-migrations';
     private const LANG_DIR = __DIR__ . '/../lang';
-    private const LANG_NAMESPACE = 'callmeaf_user';
+    private const LANG_NAMESPACE = 'callmeaf-user';
     private const LANG_GROUP = 'callmeaf-user-lang';
     public function boot()
     {
