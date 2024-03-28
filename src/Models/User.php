@@ -2,7 +2,8 @@
 
 namespace Callmeaf\User\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Callmeaf\Auth\Notifications\V1\VerifyEmail;
 use Callmeaf\Base\Contracts\HasEnum;
 use Callmeaf\Base\Traits\HasDate;
 use Callmeaf\Base\Traits\HasStatus;
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements HasEnum
+class User extends Authenticatable implements HasEnum,MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate;
 
@@ -47,6 +48,11 @@ class User extends Authenticatable implements HasEnum
         return Attribute::get(
             fn() => $this->first_name . ' ' . $this->last_name,
         );
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new VerifyEmail());
     }
 
     public static function enumsLang(): array

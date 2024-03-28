@@ -30,6 +30,7 @@ class UserResource extends JsonResource
             'full_name' => fn() => $this->fullName,
             'mobile' => fn() => $this->mobile,
             'email' => fn() => $this->email,
+            'email_verified_at' => fn() => $this->email_verified_at,
             'national_code' => fn() => $this->national_code,
             'created_at' => fn() => $this->created_at,
             'created_at_text' => fn() => $this->createdAtText,
