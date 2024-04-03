@@ -2,6 +2,7 @@
 
 namespace Callmeaf\User\Models;
 
+use Callmeaf\Base\Traits\HasMediaMethod;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Callmeaf\Auth\Notifications\V1\VerifyEmail;
 use Callmeaf\Base\Contracts\HasEnum;
@@ -15,10 +16,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasEnum,MustVerifyEmail
+class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate;
+    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate,HasMediaMethod,InteractsWithMedia;
 
     protected $fillable = [
         'status',

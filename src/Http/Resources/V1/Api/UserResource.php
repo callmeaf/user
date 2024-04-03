@@ -2,8 +2,10 @@
 
 namespace Callmeaf\User\Http\Resources\V1\Api;
 
+use Callmeaf\Media\Http\Resources\V1\Api\MediaResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class UserResource extends JsonResource
 {
@@ -34,6 +36,7 @@ class UserResource extends JsonResource
             'national_code' => fn() => $this->national_code,
             'created_at' => fn() => $this->created_at,
             'created_at_text' => fn() => $this->createdAtText,
+            'image' => fn() => new MediaResource($this->image,only: $this->only['!image'] ?? []),
         ],$this->only);
     }
 }
