@@ -13,10 +13,37 @@ return [
     ],
     'validations' => [
         'index' => [
-
+            'mobile' => false,
+            'email' => false,
+            'first_name' => false,
+            'last_name' => false,
         ],
     ],
     'resources' => [
+    ],
+    'collections' => [
+        'index' => [
+            'relations' => [],
+            'columns' => [
+                'id',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'created_at',
+                'updated_at',
+            ],
+            'attributes' => [
+                'id',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'full_name',
+                'created_at_text',
+                'updated_at_text',
+            ],
+        ],
     ],
     'controllers' => [
         'users' => \Callmeaf\User\Http\Controllers\V1\Api\UserController::class,
@@ -24,7 +51,5 @@ return [
     'middlewares' => [
         'global' => [],
     ],
-    'searchable_columns' => [
-
-    ],
+    'searcher' => \Callmeaf\User\Utilities\V1\Searcher::class,
 ];

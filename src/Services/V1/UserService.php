@@ -12,13 +12,13 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserService extends BaseService implements UserServiceInterface
 {
-    public function __construct(?Builder $query = null, ?Model $model = null, ?Collection $collection = null, ?JsonResource $resource = null, ?ResourceCollection $resourceCollection = null, array $defaultData = [],array $searchableColumns = [])
+    public function __construct(?Builder $query = null, ?Model $model = null, ?Collection $collection = null, ?JsonResource $resource = null, ?ResourceCollection $resourceCollection = null, array $defaultData = [],?string $searcher = null)
     {
-        parent::__construct($query, $model, $collection, $resource, $resourceCollection, $defaultData,$searchableColumns);
+        parent::__construct($query, $model, $collection, $resource, $resourceCollection, $defaultData,$searcher);
         $this->query = app(config('callmeaf-user.model'))->query();
         $this->resource = config('callmeaf-user.model_resource');
         $this->resourceCollection = config('callmeaf-user.model_resource_collection');
         $this->defaultData = config('callmeaf-user.default_values');
-        $this->searchableColumns = config('callmeaf-user.searchable_columns');
+        $this->searcher = config('callmeaf-user.searcher');
     }
 }

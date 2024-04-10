@@ -21,7 +21,7 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return toArrayResource([
+        return toArrayResource(data: [
             'id' => fn() => $this->id,
             'status' => fn() => $this->status,
             'status_text' => fn() => $this->statusText,
@@ -37,6 +37,6 @@ class UserResource extends JsonResource
             'created_at' => fn() => $this->created_at,
             'created_at_text' => fn() => $this->createdAtText,
             'image' => fn() => new MediaResource($this->image,only: $this->only['!image'] ?? []),
-        ],$this->only);
+        ],only: $this->only);
     }
 }

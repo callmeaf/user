@@ -21,11 +21,15 @@ class UserIndexRequest extends FormRequest
      */
     public function rules(): array
     {
-        return collect([
-            //
-        ])->map(
-            fn($values,$key) => validationManager($key,$values,config("callmeaf-user.validations.index")))
-            ->toArray();
+        return validationManager(rules: [
+            'mobile' => [],
+            'email' => [],
+            'first_name' => [],
+            'last_name' => [],
+        ],filters: [
+            ...config("callmeaf-user.validations.index"),
+            ...config('callmeaf-base.default_searcher_validation'),
+        ]);
     }
 
 }
