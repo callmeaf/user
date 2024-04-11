@@ -22,10 +22,16 @@ class UserCollection extends ResourceCollection
         return [
             'data' => $this->collection->map(fn($user) => toArrayResource(data: [
                 'id' => fn() => $user->id,
+                'status' => fn() => $user->status,
+                'status_text' => fn() => $user->statusText,
+                'type' => fn() => $user->type,
+                'type_text' => fn() => $user->typeText,
                 'mobile' => fn() => $user->mobile,
                 'email' => fn() => $user->email,
                 'first_name' => fn() => $user->first_name,
                 'last_name' => fn() => $user->last_name,
+                'national_code' => fn() => $user->national_code,
+                'email_verified_at' => fn() => $user->email_verified_at,
                 'created_at' => fn() => $user->created_at,
                 'created_at_text' => fn() => $user->createdAtText,
                 'updated_at' => fn() => $user->updated_at,

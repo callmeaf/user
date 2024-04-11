@@ -18,14 +18,17 @@ return [
             'first_name' => false,
             'last_name' => false,
         ],
+        'show' => [
+
+        ],
     ],
     'resources' => [
-    ],
-    'collections' => [
         'index' => [
             'relations' => [],
             'columns' => [
                 'id',
+                'type',
+                'status',
                 'mobile',
                 'email',
                 'first_name',
@@ -35,11 +38,31 @@ return [
             ],
             'attributes' => [
                 'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
                 'mobile',
                 'email',
                 'first_name',
                 'last_name',
-                'full_name',
+                'created_at_text',
+                'updated_at_text',
+            ],
+        ],
+        'show' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
                 'created_at_text',
                 'updated_at_text',
             ],
