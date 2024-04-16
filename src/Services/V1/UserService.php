@@ -21,4 +21,6 @@ class UserService extends BaseService implements UserServiceInterface
         $this->defaultData = config('callmeaf-user.default_values');
         $this->searcher = config('callmeaf-user.searcher');
     }
+
+
 }

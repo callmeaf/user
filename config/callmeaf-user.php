@@ -10,6 +10,10 @@ return [
         'type' => \Callmeaf\User\Enums\UserType::NORMAL,
     ],
     'events' => [
+        \Callmeaf\User\Events\Stored::class => [
+            \Callmeaf\User\Listeners\SendWelcomeMailToUser::class,
+//            \Callmeaf\User\Listeners\SendWelcomeSmsToUser::class,
+        ],
     ],
     'validations' => [
         'index' => [
@@ -18,8 +22,25 @@ return [
             'first_name' => false,
             'last_name' => false,
         ],
+        'store' => [
+            'status' => true,
+            'type' => true,
+            'mobile' => true,
+            'email' => false,
+            'first_name' => true,
+            'last_name' => true,
+            'national_code' => true,
+        ],
         'show' => [
 
+        ],
+        'update' => [
+            'status' => false,
+            'type' => false,
+            'email' => false,
+            'first_name' => false,
+            'last_name' => false,
+            'national_code' => false,
         ],
     ],
     'resources' => [
@@ -50,7 +71,41 @@ return [
                 'updated_at_text',
             ],
         ],
+        'store' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at_text',
+                'updated_at_text',
+            ],
+        ],
         'show' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at_text',
+                'updated_at_text',
+            ],
+        ],
+        'update' => [
             'relations' => [],
             'attributes' => [
                 'id',
