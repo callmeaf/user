@@ -36,6 +36,10 @@ class UserResource extends JsonResource
             'national_code' => fn() => $this->national_code,
             'created_at' => fn() => $this->created_at,
             'created_at_text' => fn() => $this->createdAtText,
+            'updated_at' => fn() => $this->updated_at,
+            'updated_at_text' => fn() => $this->updatedAtText,
+            'deleted_at' => fn() => $this->deleted_at,
+            'deleted_at_text' => fn() => $this->deletedAtText,
             'image' => fn() => new MediaResource($this->image,only: $this->only['!image'] ?? []),
         ],only: $this->only);
     }

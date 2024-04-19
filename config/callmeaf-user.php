@@ -14,6 +14,21 @@ return [
             \Callmeaf\User\Listeners\SendWelcomeMailToUser::class,
 //            \Callmeaf\User\Listeners\SendWelcomeSmsToUser::class,
         ],
+        \Callmeaf\User\Events\Updated::class => [
+            // listeners
+        ],
+        \Callmeaf\User\Events\StatusUpdated::class => [
+            // listeners
+        ],
+        \Callmeaf\User\Events\Destroyed::class => [
+            // listeners
+        ],
+        \Callmeaf\User\Events\Restored::class => [
+            // listeners
+        ],
+        \Callmeaf\User\Events\ForceDestroyed::class => [
+            // listeners
+        ],
     ],
     'validations' => [
         'index' => [
@@ -41,6 +56,18 @@ return [
             'first_name' => false,
             'last_name' => false,
             'national_code' => false,
+        ],
+        'status_update' => [
+            'status' => true,
+        ],
+        'destroy' => [
+            //
+        ],
+        'restore' => [
+            //
+        ],
+        'force_destroy' => [
+            //
         ],
     ],
     'resources' => [
@@ -120,6 +147,84 @@ return [
                 'national_code',
                 'created_at_text',
                 'updated_at_text',
+            ],
+        ],
+        'status_update' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at_text',
+                'updated_at_text',
+            ],
+        ],
+        'destroy' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at_text',
+                'updated_at_text',
+                'deleted_at',
+                'deleted_at_text',
+            ],
+        ],
+        'restore' => [
+            'id_column' => 'id',
+            'columns' => [
+                'id',
+                'type',
+                'status',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at',
+                'updated_at',
+            ],
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at_text',
+                'updated_at_text',
+            ],
+        ],
+        'force_destroy' => [
+            'id_column' => 'id',
+            'columns' => [
+                'id',
+                'first_name',
+                'last_name',
+            ],
+            'relations' => [],
+            'attributes' => [
+                'id',
             ],
         ],
     ],
