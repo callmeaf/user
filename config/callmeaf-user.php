@@ -66,6 +66,9 @@ return [
         'restore' => [
             //
         ],
+        'trashed' => [
+            //
+        ],
         'force_destroy' => [
             //
         ],
@@ -213,6 +216,36 @@ return [
                 'national_code',
                 'created_at_text',
                 'updated_at_text',
+            ],
+        ],
+        'trashed' => [
+            'relations' => [],
+            'columns' => [
+                'id',
+                'type',
+                'status',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'created_at',
+                'updated_at',
+                'deleted_at',
+            ],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'created_at_text',
+                'updated_at_text',
+                'deleted_at',
+                'deleted_at_text',
             ],
         ],
         'force_destroy' => [

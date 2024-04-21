@@ -36,6 +36,8 @@ class UserCollection extends ResourceCollection
                 'created_at_text' => fn() => $user->createdAtText,
                 'updated_at' => fn() => $user->updated_at,
                 'updated_at_text' => fn() => $user->updatedAtText,
+                'deleted_at' => fn() => $user->deleted_at,
+                'deleted_at_text' => fn() => $user->deletedAtText,
             ],only: $this->only)),
         ];
     }

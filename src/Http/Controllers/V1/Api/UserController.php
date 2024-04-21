@@ -15,6 +15,7 @@ use Callmeaf\User\Http\Requests\V1\Api\UserRestoreRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserShowRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserStatusUpdateRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserStoreRequest;
+use Callmeaf\User\Http\Requests\V1\Api\UserTrashedIndexRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserUpdateRequest;
 use Callmeaf\User\Models\User;
 use Callmeaf\User\Services\V1\UserService;
@@ -138,6 +139,23 @@ class UserController extends ApiController
              ],__('callmeaf-base::v1.successful_restored',[
                  'title' =>  $user->responseTitles('restore')
              ]));
+        } catch (\Exception $exception) {
+            report($exception);
+            return apiResponse([],$exception);
+        }
+    }
+
+    public function trashed(UserTrashedIndexRequest $request)
+    {
+        try {
+            $users = $this->userService->onlyTrashed()->all(
+                relations: config('callmeaf-user.resources.trashed.relations'),
+                columns: config('callmeaf-user.resources.trashed.columns'),
+                filters: $request->validated(),
+            )->getCollection(asResourceCollection: true,asResponseData: true,attributes: config('callmeaf-user.resources.trashed.attributes'));
+            return apiResponse([
+                'users' => $users,
+            ],__('callmeaf-base::v1.successful_loaded'));
         } catch (\Exception $exception) {
             report($exception);
             return apiResponse([],$exception);

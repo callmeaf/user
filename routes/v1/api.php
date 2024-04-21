@@ -6,8 +6,11 @@ Route::prefix(config('callmeaf-base.api.prefix_url'))->as(config('callmeaf-base.
     Route::middleware(config('callmeaf-user.middlewares.global'))->group(function() {
         Route::apiResource('users',config('callmeaf-user.controllers.users'));
         Route::prefix('users')->as('users.')->controller(config('callmeaf-user.controllers.users'))->group(function() {
-            Route::patch('{user}/restore','restore')->name('restore');
-            Route::delete('{user}/force','forceDestroy')->name('force_destroy');
+            Route::prefix('{user}')->group(function() {
+                Route::patch('/restore','restore')->name('restore');
+                Route::delete('/force','forceDestroy')->name('force_destroy');
+            });
+            Route::get('/trashed/index','trashed')->name('trashed.index');
         });
 
     });
