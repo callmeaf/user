@@ -2,7 +2,7 @@
 
 namespace Callmeaf\User\Listeners;
 
-use Callmeaf\User\Events\Stored;
+use Callmeaf\User\Events\UserStored;
 
 class SendWelcomeSmsToUser
 {
@@ -17,7 +17,7 @@ class SendWelcomeSmsToUser
     /**
      * Handle the event.
      */
-    public function handle(Stored $event): void
+    public function handle(UserStored $event): void
     {
         $user = $event->user;
         $mobile = $user->mobile;

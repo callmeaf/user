@@ -3,10 +3,7 @@
 namespace Callmeaf\User\Http\Requests\V1\Api;
 
 use Callmeaf\User\Enums\UserStatus;
-use Callmeaf\User\Enums\UserType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class UserStatusUpdateRequest extends FormRequest

@@ -3,8 +3,7 @@
 namespace Callmeaf\User\Listeners;
 
 use Callmeaf\User\Mails\WelcomeMail;
-use Callmeaf\User\Events\Stored;
-use Illuminate\Support\Facades\Log;
+use Callmeaf\User\Events\UserStored;
 use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeMailToUser
@@ -20,7 +19,7 @@ class SendWelcomeMailToUser
     /**
      * Handle the event.
      */
-    public function handle(Stored $event): void
+    public function handle(UserStored $event): void
     {
         $email = $event->user->email;
         if($email) {

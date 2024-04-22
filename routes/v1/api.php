@@ -7,6 +7,7 @@ Route::prefix(config('callmeaf-base.api.prefix_url'))->as(config('callmeaf-base.
         Route::apiResource('users',config('callmeaf-user.controllers.users'));
         Route::prefix('users')->as('users.')->controller(config('callmeaf-user.controllers.users'))->group(function() {
             Route::prefix('{user}')->group(function() {
+                Route::patch('/status','statusUpdate')->name('status_update');
                 Route::patch('/restore','restore')->name('restore');
                 Route::delete('/force','forceDestroy')->name('force_destroy');
             });

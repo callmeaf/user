@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Restored
+class UserRestored
 {
     use Dispatchable, SerializesModels;
 

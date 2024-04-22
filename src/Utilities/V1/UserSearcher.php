@@ -5,7 +5,7 @@ namespace Callmeaf\User\Utilities\V1;
 use Callmeaf\Base\Utilities\V1\Contracts\SearcherInterface;
 use Illuminate\Database\Eloquent\Builder;
 
-class Searcher implements SearcherInterface
+class UserSearcher implements SearcherInterface
 {
     public function apply(Builder $query, array $filters = []): void
     {

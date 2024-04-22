@@ -10,23 +10,23 @@ return [
         'type' => \Callmeaf\User\Enums\UserType::NORMAL,
     ],
     'events' => [
-        \Callmeaf\User\Events\Stored::class => [
+        \Callmeaf\User\Events\UserStored::class => [
             \Callmeaf\User\Listeners\SendWelcomeMailToUser::class,
 //            \Callmeaf\User\Listeners\SendWelcomeSmsToUser::class,
         ],
-        \Callmeaf\User\Events\Updated::class => [
+        \Callmeaf\User\Events\UserUpdated::class => [
             // listeners
         ],
-        \Callmeaf\User\Events\StatusUpdated::class => [
+        \Callmeaf\User\Events\UserStatusUpdated::class => [
             // listeners
         ],
-        \Callmeaf\User\Events\Destroyed::class => [
+        \Callmeaf\User\Events\UserDestroyed::class => [
             // listeners
         ],
-        \Callmeaf\User\Events\Restored::class => [
+        \Callmeaf\User\Events\UserRestored::class => [
             // listeners
         ],
-        \Callmeaf\User\Events\ForceDestroyed::class => [
+        \Callmeaf\User\Events\UserForceDestroyed::class => [
             // listeners
         ],
     ],
@@ -267,5 +267,5 @@ return [
     'middlewares' => [
         'global' => [],
     ],
-    'searcher' => \Callmeaf\User\Utilities\V1\Searcher::class,
+    'searcher' => \Callmeaf\User\Utilities\V1\UserSearcher::class,
 ];
