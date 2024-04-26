@@ -10,6 +10,7 @@ Route::prefix(config('callmeaf-base.api.prefix_url'))->as(config('callmeaf-base.
                 Route::patch('/status','statusUpdate')->name('status_update');
                 Route::patch('/restore','restore')->name('restore');
                 Route::delete('/force','forceDestroy')->name('force_destroy');
+                Route::patch('/roles','syncRoles')->name('roles.sync');
             });
             Route::get('/trashed/index','trashed')->name('trashed.index');
         });

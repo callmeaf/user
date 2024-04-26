@@ -3,9 +3,9 @@
 namespace Callmeaf\User\Http\Resources\V1\Api;
 
 use Callmeaf\Media\Http\Resources\V1\Api\MediaResource;
+use Callmeaf\Permission\Http\Resources\V1\Api\RoleCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Log;
 
 class UserResource extends JsonResource
 {
@@ -41,6 +41,8 @@ class UserResource extends JsonResource
             'deleted_at' => fn() => $this->deleted_at,
             'deleted_at_text' => fn() => $this->deletedAtText,
             'image' => fn() => new MediaResource($this->image,only: $this->only['!image'] ?? []),
+            'roles_ids' => fn() => $this->roles()->pluck('id'),
+            'roles' => fn() => new RoleCollection($this->roles,only: $this->only['!roles'] ?? []),
         ],only: $this->only);
     }
 }

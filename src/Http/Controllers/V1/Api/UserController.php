@@ -15,6 +15,7 @@ use Callmeaf\User\Http\Requests\V1\Api\UserRestoreRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserShowRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserStatusUpdateRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserStoreRequest;
+use Callmeaf\User\Http\Requests\V1\Api\UserSyncRolesRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserTrashedIndexRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserUpdateRequest;
 use Callmeaf\User\Models\User;
@@ -178,4 +179,18 @@ class UserController extends ApiController
         }
     }
 
+    public function syncRoles(UserSyncRolesRequest $request,User $user)
+    {
+        try {
+            $user = $this->userService->setModel($user)->syncRoles(roles: $request->get('roles_ids',[]))->getModel(asResource: true,attributes: config('callmeaf-user.resources.sync_roles.attributes'),relations: config('callmeaf-user.resources.sync_roles.relations'));
+             return apiResponse([
+                 'user' => $user,
+             ],__('callmeaf-base::v1.successful_updated', [
+                 'title' => $user->responseTitles('sync_roles')
+             ]));
+        } catch (\Exception $exception) {
+            report($exception);
+            return apiResponse([],$exception);
+        }
+    }
 }

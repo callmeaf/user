@@ -20,10 +20,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,HasResponseTitles
 {
-    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate,HasMediaMethod,InteractsWithMedia,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate,HasMediaMethod,InteractsWithMedia,SoftDeletes,HasRoles;
 
     protected $fillable = [
         'status',
@@ -69,6 +70,7 @@ class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,H
             'destroy' => $this->fullName,
             'restore' => $this->fullName,
             'force_destroy' => $this->fullName,
+            'sync_roles' => $this->fullName,
         ][$key];
     }
 

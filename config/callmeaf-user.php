@@ -72,6 +72,10 @@ return [
         'force_destroy' => [
             //
         ],
+        'sync_roles' => [
+            'roles_ids' => false,
+            'roles_ids.*' => true,
+        ],
     ],
     'resources' => [
         'index' => [
@@ -258,6 +262,23 @@ return [
             'relations' => [],
             'attributes' => [
                 'id',
+            ],
+        ],
+        'sync_roles' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'type',
+                'type_text',
+                'status',
+                'status_text',
+                'mobile',
+                'email',
+                'first_name',
+                'last_name',
+                'national_code',
+                'created_at_text',
+                'updated_at_text',
             ],
         ],
     ],
