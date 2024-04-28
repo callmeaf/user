@@ -11,7 +11,7 @@ class UserShowRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return app(config('callmeaf-user.form_request_authorizers.user'))->show();
     }
 
     /**

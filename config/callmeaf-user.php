@@ -285,6 +285,9 @@ return [
     'controllers' => [
         'users' => \Callmeaf\User\Http\Controllers\V1\Api\UserController::class,
     ],
+    'form_request_authorizers' => [
+        'users' => \Callmeaf\User\Utilities\V1\UserFormRequestAuthorizer::class,
+    ],
     'middlewares' => [
         'global' => [],
     ],
