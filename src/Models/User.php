@@ -4,6 +4,7 @@ namespace Callmeaf\User\Models;
 
 use Callmeaf\Base\Contracts\HasResponseTitles;
 use Callmeaf\Base\Traits\HasMediaMethod;
+use Callmeaf\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Callmeaf\Auth\Notifications\V1\VerifyEmail;
 use Callmeaf\Base\Contracts\HasEnum;
@@ -20,7 +21,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,HasResponseTitles
 {

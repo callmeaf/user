@@ -65,4 +65,9 @@ class UserFormRequestAuthorizer extends FormRequestAuthorizer
     {
         return userCan(PermissionName::USER_UPDATE);
     }
+
+    public function profileImageUpdate(): bool
+    {
+        return userCan(PermissionName::USER_UPDATE);
+    }
 }

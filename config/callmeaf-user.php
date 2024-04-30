@@ -27,7 +27,7 @@ return [
             // listeners
         ],
         \Callmeaf\User\Events\UserForceDestroyed::class => [
-            // listeners
+            \Callmeaf\User\Listeners\DetachRolesPivotByUser::class,
         ],
     ],
     'validations' => [
@@ -75,6 +75,9 @@ return [
         'sync_roles' => [
             'roles_ids' => false,
             'roles_ids.*' => true,
+        ],
+        'profile_image_update' => [
+            'image' => true,
         ],
     ],
     'resources' => [
@@ -281,15 +284,42 @@ return [
                 'updated_at_text',
             ],
         ],
+        'profile_image_update' => [
+            'relations' => [],
+            'attributes' => [
+                'id',
+                'status',
+                'status_text',
+                'type',
+                'type_text',
+                'first_name',
+                'last_name',
+                'full_name',
+                'mobile',
+                'email',
+                'email_verified_at',
+                'national_code',
+                'image',
+                '!image' => [
+                    'id',
+                    'url'
+                ],
+            ],
+        ],
     ],
     'controllers' => [
         'users' => \Callmeaf\User\Http\Controllers\V1\Api\UserController::class,
     ],
     'form_request_authorizers' => [
-        'users' => \Callmeaf\User\Utilities\V1\UserFormRequestAuthorizer::class,
+        'user' => \Callmeaf\User\Utilities\V1\UserFormRequestAuthorizer::class,
     ],
     'middlewares' => [
-        'global' => [],
+        'global' => [
+            'auth:sanctum'
+        ],
     ],
     'searcher' => \Callmeaf\User\Utilities\V1\UserSearcher::class,
+    'seeders' => [
+        \Callmeaf\User\Seeders\UserSeeder::class,
+    ],
 ];

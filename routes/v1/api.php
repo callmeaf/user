@@ -11,6 +11,7 @@ Route::prefix(config('callmeaf-base.api.prefix_url'))->as(config('callmeaf-base.
                 Route::patch('/restore','restore')->name('restore');
                 Route::delete('/force','forceDestroy')->name('force_destroy');
                 Route::patch('/roles','syncRoles')->name('roles.sync');
+                Route::patch('/profile_image','profileImageUpdate')->name('profile_image.update');
             });
             Route::get('/trashed/index','trashed')->name('trashed.index');
         });

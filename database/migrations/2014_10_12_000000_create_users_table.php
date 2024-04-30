@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('status')->nullable();
-            $table->tinyInteger('type')->nullable();
+            $table->string('status')->nullable();
+            $table->string('type')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('mobile')->unique()->nullable();

@@ -2,6 +2,7 @@
 
 namespace Callmeaf\User;
 
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +28,7 @@ class CallmeafUserServiceProvider extends ServiceProvider
         $this->registerEvents();
         $this->registerViews();
         $this->registerLang();
+        $this->registerSeeders();
     }
 
     private function registerConfig()
@@ -81,5 +83,12 @@ class CallmeafUserServiceProvider extends ServiceProvider
         $this->publishes([
             self::LANG_DIR => $langPathFromVendor,
         ],self::LANG_GROUP);
+    }
+
+    private function registerSeeders(): void
+    {
+        $this->callAfterResolving(DatabaseSeeder::class,function ($seeder) {
+            $seeder->callOnce(config('callmeaf-user.seeders'));
+        });
     }
 }

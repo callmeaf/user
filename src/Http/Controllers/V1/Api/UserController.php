@@ -2,7 +2,10 @@
 
 namespace Callmeaf\User\Http\Controllers\V1\Api;
 
+use Callmeaf\Auth\Http\Requests\V1\Api\AuthProfileImageUpdateRequest;
 use Callmeaf\Base\Http\Controllers\V1\Api\ApiController;
+use Callmeaf\Media\Enums\MediaCollection;
+use Callmeaf\Media\Enums\MediaDisk;
 use Callmeaf\User\Events\UserDestroyed;
 use Callmeaf\User\Events\UserForceDestroyed;
 use Callmeaf\User\Events\UserRestored;
@@ -11,6 +14,7 @@ use Callmeaf\User\Events\UserUpdated;
 use Callmeaf\User\Http\Requests\V1\Api\UserDestroyRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserForceDestroyRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserIndexRequest;
+use Callmeaf\User\Http\Requests\V1\Api\UserProfileImageUpdateRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserRestoreRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserShowRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserStatusUpdateRequest;
@@ -188,6 +192,23 @@ class UserController extends ApiController
              ],__('callmeaf-base::v1.successful_updated', [
                  'title' => $user->responseTitles('sync_roles')
              ]));
+        } catch (\Exception $exception) {
+            report($exception);
+            return apiResponse([],$exception);
+        }
+    }
+
+    public function profileImageUpdate(UserProfileImageUpdateRequest $request)
+    {
+        try {
+            $user = $this->userService->setModel($request->user())->createMedia(
+                file: $request->file('image'),
+                collection: MediaCollection::IMAGE,
+                disk: MediaDisk::USERS,
+            )->getModel(asResource: true,attributes: config('callmeaf-user.resources.profile_image_update.attributes'),relations: config('callmeaf-user.resources.profile_image_update.relations'));
+            return apiResponse([
+                'user' => $user,
+            ],__('callmeaf-base::v1.successful_updated_non_title'));
         } catch (\Exception $exception) {
             report($exception);
             return apiResponse([],$exception);
