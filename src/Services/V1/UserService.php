@@ -4,14 +4,12 @@ namespace Callmeaf\User\Services\V1;
 
 use Callmeaf\Base\Services\V1\BaseService;
 use Callmeaf\Permission\Models\Role;
-use Callmeaf\User\Models\User;
 use Callmeaf\User\Services\V1\Contracts\UserServiceInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Support\Facades\Log;
 
 class UserService extends BaseService implements UserServiceInterface
 {

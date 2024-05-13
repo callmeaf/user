@@ -2,7 +2,6 @@
 
 namespace Callmeaf\User\Http\Controllers\V1\Api;
 
-use Callmeaf\Auth\Http\Requests\V1\Api\AuthProfileImageUpdateRequest;
 use Callmeaf\Base\Http\Controllers\V1\Api\ApiController;
 use Callmeaf\Media\Enums\MediaCollection;
 use Callmeaf\Media\Enums\MediaDisk;
@@ -30,6 +29,7 @@ class UserController extends ApiController
     protected UserService $userService;
     public function __construct()
     {
+        app(config('callmeaf-user.middlewares.user'))($this);
         $this->userService = app(config('callmeaf-user.service'));
     }
 
