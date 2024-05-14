@@ -23,7 +23,7 @@ class UserShowRequest extends FormRequest
     {
         return validationManager(rules: [
 
-        ],filters: config("callmeaf-user.validations.show"));
+        ],filters: app(config("callmeaf-user.validations.user"))->show());
     }
 
 }

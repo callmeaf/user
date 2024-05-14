@@ -25,7 +25,7 @@ class UserStatusUpdateRequest extends FormRequest
     {
         return validationManager(rules: [
             'status' => [new Enum(UserStatus::class)],
-        ],filters: config("callmeaf-user.validations.status_update"));
+        ],filters: app(config("callmeaf-user.validations.user"))->statusUpdate());
     }
 
 }

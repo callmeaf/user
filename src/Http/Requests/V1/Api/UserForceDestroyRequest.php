@@ -23,7 +23,7 @@ class UserForceDestroyRequest extends FormRequest
     {
         return validationManager(rules: [
 
-        ],filters: config("callmeaf-user.validations.force_destroy"));
+        ],filters: app(config("callmeaf-user.validations.user"))->forceDestroy());
     }
 
 }

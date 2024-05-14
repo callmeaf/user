@@ -27,7 +27,7 @@ class UserIndexRequest extends FormRequest
             'first_name' => [],
             'last_name' => [],
         ],filters: [
-            ...config("callmeaf-user.validations.index"),
+            ...app(config("callmeaf-user.validations.user"))->index(),
             ...config('callmeaf-base.default_searcher_validation'),
         ]);
     }

@@ -23,8 +23,14 @@ class UserTrashedIndexRequest extends FormRequest
     public function rules(): array
     {
         return validationManager(rules: [
-
-        ],filters: config("callmeaf-user.validations.trashed"));
+            'mobile' => [],
+            'email' => [],
+            'first_name' => [],
+            'last_name' => [],
+        ],filters: [
+            ...app(config("callmeaf-user.validations.user"))->trashed(),
+            ...config('callmeaf-base.default_searcher_validation'),
+        ]);
     }
 
 }

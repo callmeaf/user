@@ -31,54 +31,8 @@ return [
         ],
     ],
     'validations' => [
-        'index' => [
-            'mobile' => false,
-            'email' => false,
-            'first_name' => false,
-            'last_name' => false,
-        ],
-        'store' => [
-            'status' => true,
-            'type' => true,
-            'mobile' => true,
-            'email' => false,
-            'first_name' => true,
-            'last_name' => true,
-            'national_code' => true,
-        ],
-        'show' => [
+        'user' => \Callmeaf\User\Utilities\V1\User\Api\UserFormRequestValidator::class,
 
-        ],
-        'update' => [
-            'status' => false,
-            'type' => false,
-            'email' => false,
-            'first_name' => false,
-            'last_name' => false,
-            'national_code' => false,
-        ],
-        'status_update' => [
-            'status' => true,
-        ],
-        'destroy' => [
-            //
-        ],
-        'restore' => [
-            //
-        ],
-        'trashed' => [
-            //
-        ],
-        'force_destroy' => [
-            //
-        ],
-        'sync_roles' => [
-            'roles_ids' => false,
-            'roles_ids.*' => true,
-        ],
-        'profile_image_update' => [
-            'image' => true,
-        ],
     ],
     'resources' => [
         'index' => [

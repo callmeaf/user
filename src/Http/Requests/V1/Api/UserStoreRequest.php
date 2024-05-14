@@ -33,7 +33,7 @@ class UserStoreRequest extends FormRequest
             'mobile' => ['digits:11',Rule::unique(config('callmeaf-user.model'),'mobile')],
             'national_code' => ['digits:10',Rule::unique(config('callmeaf-user.model'),'national_code')],
             'email' => ['email',Rule::unique(config('callmeaf-user.model'),'email')],
-        ],filters: config("callmeaf-user.validations.store"));
+        ],filters: app(config("callmeaf-user.validations.user"))->store());
     }
 
 }

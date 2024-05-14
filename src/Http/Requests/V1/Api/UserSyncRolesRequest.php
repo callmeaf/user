@@ -28,7 +28,7 @@ class UserSyncRolesRequest extends FormRequest
         return validationManager(rules: [
             'roles_ids' => ['array'],
             'roles_ids.*' => [Rule::exists(config('callmeaf-role.model'),'id')],
-        ],filters: config("callmeaf-user.validations.sync_roles"));
+        ],filters: app(config("callmeaf-user.validations.user"))->syncRoles());
     }
 
 }

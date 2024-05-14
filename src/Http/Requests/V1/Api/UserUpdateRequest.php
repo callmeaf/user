@@ -33,7 +33,7 @@ class UserUpdateRequest extends FormRequest
             'last_name' => ['string','min:3','max:255'],
             'national_code' => ['digits:10',Rule::unique(config('callmeaf-user.model'),'national_code')->ignore($userId)],
             'email' => ['email',Rule::unique(config('callmeaf-user.model'),'email')->ignore($userId)],
-        ],filters: config("callmeaf-user.validations.update"));
+        ],filters: app(config("callmeaf-user.validations.user"))->update());
     }
 
 }

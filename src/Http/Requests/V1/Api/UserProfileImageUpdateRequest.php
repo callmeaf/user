@@ -23,7 +23,7 @@ class UserProfileImageUpdateRequest extends FormRequest
     {
         return validationManager(rules: [
             'image' => ['image','max:1024'],
-        ],filters: config("callmeaf-user.validations.profile_image_update"));
+        ],filters: app(config("callmeaf-user.validations.user"))->profileImageUpdate());
     }
 
 }

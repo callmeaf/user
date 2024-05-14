@@ -23,7 +23,7 @@ class UserRestoreRequest extends FormRequest
     {
         return validationManager(rules: [
 
-        ],filters: config("callmeaf-user.validations.restore"));
+        ],filters: app(config("callmeaf-user.validations.user"))->restore());
     }
 
 }
