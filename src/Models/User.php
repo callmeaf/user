@@ -4,6 +4,7 @@ namespace Callmeaf\User\Models;
 
 use Callmeaf\Base\Contracts\HasResponseTitles;
 use Callmeaf\Base\Traits\HasMediaMethod;
+use Callmeaf\Base\Traits\Localeable;
 use Callmeaf\Permission\Traits\HasRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Callmeaf\Auth\Notifications\V1\VerifyEmail;
@@ -24,7 +25,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,HasResponseTitles
 {
-    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate,HasMediaMethod,InteractsWithMedia,SoftDeletes,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate,HasMediaMethod,InteractsWithMedia,SoftDeletes,HasRoles,Localeable;
 
     protected $fillable = [
         'status',
