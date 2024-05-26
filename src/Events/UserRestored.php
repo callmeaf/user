@@ -2,7 +2,7 @@
 
 namespace Callmeaf\User\Events;
 
-use Illuminate\Foundation\Auth\User;
+use Callmeaf\User\Models\User;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 

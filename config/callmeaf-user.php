@@ -10,9 +10,15 @@ return [
         'type' => \Callmeaf\User\Enums\UserType::NORMAL,
     ],
     'events' => [
+        \Callmeaf\User\Events\UserIndexed::class => [
+            // listeners
+        ],
         \Callmeaf\User\Events\UserStored::class => [
             \Callmeaf\User\Listeners\SendWelcomeMailToUser::class,
 //            \Callmeaf\User\Listeners\SendWelcomeSmsToUser::class,
+        ],
+        \Callmeaf\User\Events\UserShowed::class => [
+            // listeners
         ],
         \Callmeaf\User\Events\UserUpdated::class => [
             // listeners
@@ -26,8 +32,17 @@ return [
         \Callmeaf\User\Events\UserRestored::class => [
             // listeners
         ],
+        \Callmeaf\User\Events\UserTrashed::class => [
+            // listeners
+        ],
         \Callmeaf\User\Events\UserForceDestroyed::class => [
             \Callmeaf\User\Listeners\DetachRolesPivotByUser::class,
+        ],
+        \Callmeaf\User\Events\UserSyncedRoles::class => [
+            // listeners
+        ],
+        \Callmeaf\User\Events\UserProfileImageUpdated::class => [
+            // listeners
         ],
     ],
     'validations' => [
