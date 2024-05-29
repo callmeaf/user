@@ -62,16 +62,16 @@ class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,H
         $this->notify(new VerifyEmail());
     }
 
-    public function responseTitles(string $key): string
+    public function responseTitles(string $key,string $default = ''): string
     {
         return [
-            'store' => $this->fullName,
-            'update' => $this->fullName,
-            'status_update' => $this->fullName,
-            'destroy' => $this->fullName,
-            'restore' => $this->fullName,
-            'force_destroy' => $this->fullName,
-            'sync_roles' => $this->fullName,
+            'store' => $this->fullName ?? $default,
+            'update' => $this->fullName ?? $default,
+            'status_update' => $this->fullName ?? $default,
+            'destroy' => $this->fullName ?? $default,
+            'restore' => $this->fullName ?? $default,
+            'force_destroy' => $this->fullName ?? $default,
+            'sync_roles' => $this->fullName ?? $default,
         ][$key];
     }
 
