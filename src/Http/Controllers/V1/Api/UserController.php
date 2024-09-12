@@ -29,27 +29,31 @@ use Callmeaf\User\Http\Requests\V1\Api\UserTrashedIndexRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserUpdateRequest;
 use Callmeaf\User\Models\User;
 use Callmeaf\User\Services\V1\UserService;
+use Callmeaf\User\Utilities\V1\User\Api\UserResources;
 
 class UserController extends ApiController
 {
     protected UserService $userService;
+    protected UserResources $userResources;
     public function __construct()
     {
         app(config('callmeaf-user.middlewares.user'))($this);
         $this->userService = app(config('callmeaf-user.service'));
+        $this->userResources = app(config('callmeaf-user.resources.user'));
     }
 
     public function index(UserIndexRequest $request)
     {
         try {
+            $resources = $this->userResources->index();
             $users = $this->userService->all(
-                relations: config('callmeaf-user.resources.index.relations'),
-                columns: config('callmeaf-user.resources.index.columns'),
+                relations: $resources->relations(),
+                columns: $resources->columns(),
                 filters: $request->validated(),
                 events: [
                     UserIndexed::class,
                 ],
-            )->getCollection(asResourceCollection: true,asResponseData: true,attributes: config('callmeaf-user.resources.index.attributes'));
+            )->getCollection(asResourceCollection: true,asResponseData: true,attributes: $resources->attributes());
              return apiResponse([
                  'users' => $users,
              ],__('callmeaf-base::v1.successful_loaded'));
@@ -62,9 +66,10 @@ class UserController extends ApiController
     public function store(UserStoreRequest $request)
     {
         try {
+            $resources = $this->userResources->store();
             $user = $this->userService->create(data: $request->validated(),events: [
                 UserStored::class
-            ])->getModel(asResource: true,attributes: config('callmeaf-user.resources.store.attributes'),relations: config('callmeaf-user.resources.store.relations'));
+            ])->getModel(asResource: true,attributes: $resources->attributes(),relations: $resources->relations());
             return apiResponse([
                 'user' => $user,
             ],__('callmeaf-base::v1.successful_created', [
@@ -79,10 +84,11 @@ class UserController extends ApiController
     public function show(UserShowRequest $request,User $user)
     {
         try {
+            $resources = $this->userResources->show();
             $user = $this->userService->setModel($user)->getModel(
                 asResource: true,
-                attributes: config('callmeaf-user.resources.show.attributes'),
-                relations: config('callmeaf-user.resources.show.relations'),
+                attributes: $resources->attributes(),
+                relations: $resources->relations(),
                 events: [
                     UserShowed::class,
                 ],
@@ -99,9 +105,10 @@ class UserController extends ApiController
     public function update(UserUpdateRequest $request,User $user)
     {
         try {
+            $resources = $this->userResources->update();
             $user = $this->userService->setModel($user)->update(data: $request->validated(),events: [
                 UserUpdated::class,
-            ])->getModel(asResource: true,attributes: config('callmeaf-user.resources.update.attributes'),relations: config('callmeaf-user.resources.update.relations'));
+            ])->getModel(asResource: true,attributes: $resources->attributes(),relations: $resources->relations());
             return apiResponse([
                 'user' => $user,
             ],__('callmeaf-base::v1.successful_updated', [
@@ -116,11 +123,12 @@ class UserController extends ApiController
     public function statusUpdate(UserStatusUpdateRequest $request,User $user)
     {
         try {
+            $resources = $this->userResources->statusUpdate();
             $user = $this->userService->setModel($user)->update([
                 'status' => $request->get('status'),
             ],events: [
                 UserStatusUpdated::class,
-            ])->getModel(asResource: true,attributes: config('callmeaf-user.resources.status_update.attributes'),relations: config('callmeaf-user.resources.status_update.relations'));
+            ])->getModel(asResource: true,attributes: $resources->attributes(),relations: $resources->relations());
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_updated', [
@@ -135,9 +143,10 @@ class UserController extends ApiController
     public function destroy(UserDestroyRequest $request,User $user)
     {
         try {
+            $resources = $this->userResources->destroy();
              $user = $this->userService->setModel($user)->delete(events: [
                  UserDestroyed::class,
-             ])->getModel(asResource: true,attributes: config('callmeaf-user.resources.destroy.attributes'),relations: config('callmeaf-user.resources.destroy.relations'));
+             ])->getModel(asResource: true,attributes: $resources->attributes(),relations: $resources->relations());
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_deleted', [
@@ -153,9 +162,10 @@ class UserController extends ApiController
     public function restore(UserRestoreRequest $request,string|int $id)
     {
         try {
-            $user = $this->userService->restore(id: $id,idColumn: config('callmeaf-user.resources.restore.id_column'),events: [
+            $resources = $this->userResources->restore();
+            $user = $this->userService->restore(id: $id,idColumn: $resources->idColumn(),events: [
                 UserRestored::class
-            ])->getModel(asResource: true,attributes: config('callmeaf-user.resources.restore.attributes'),relations: config('callmeaf-user.resources.restore.relations'));
+            ])->getModel(asResource: true,attributes: $resources->attributes(),relations: $resources->relations());
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_restored',[
@@ -170,14 +180,15 @@ class UserController extends ApiController
     public function trashed(UserTrashedIndexRequest $request)
     {
         try {
+            $resources = $this->userResources->trashed();
             $users = $this->userService->onlyTrashed()->all(
-                relations: config('callmeaf-user.resources.trashed.relations'),
-                columns: config('callmeaf-user.resources.trashed.columns'),
+                relations: $resources->relations(),
+                columns: $resources->columns(),
                 filters: $request->validated(),
                 events: [
                     UserTrashed::class,
                 ],
-            )->getCollection(asResourceCollection: true,asResponseData: true,attributes: config('callmeaf-user.resources.trashed.attributes'));
+            )->getCollection(asResourceCollection: true,asResponseData: true,attributes: $resources->attributes());
             return apiResponse([
                 'users' => $users,
             ],__('callmeaf-base::v1.successful_loaded'));
@@ -190,9 +201,10 @@ class UserController extends ApiController
     public function forceDestroy(UserForceDestroyRequest $request,string|int $id)
     {
         try {
-            $user = $this->userService->forceDelete(id: $id,idColumn: config('callmeaf-user.resources.force_destroy.id_column'),columns: config('callmeaf-user.resources.force_destroy.columns'),events: [
+            $resources = $this->userResources->forceDestroy();
+            $user = $this->userService->forceDelete(id: $id,idColumn: $resources->idColumn(),columns: $resources->columns(),events: [
                 UserForceDestroyed::class,
-            ])->getModel(asResource: true,attributes: config('callmeaf-user.resources.force_destroy.attributes'),relations: config('callmeaf-user.resources.force_destroy.relations'));
+            ])->getModel(asResource: true,attributes: $resources->attributes(),relations: $resources->relations());
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_force_destroyed',[
@@ -207,10 +219,11 @@ class UserController extends ApiController
     public function syncRoles(UserSyncRolesRequest $request,User $user)
     {
         try {
+            $resources = $this->userResources->syncRoles();
             $user = $this->userService->setModel($user)->syncRoles(roles: $request->get('roles_ids',[]))->getModel(
                 asResource: true,
-                attributes: config('callmeaf-user.resources.sync_roles.attributes'),
-                relations: config('callmeaf-user.resources.sync_roles.relations'),
+                attributes: $resources->attributes(),
+                relations: $resources->relations(),
                 events: [
                     UserSyncedRoles::class,
                 ],
@@ -229,14 +242,15 @@ class UserController extends ApiController
     public function profileImageUpdate(UserProfileImageUpdateRequest $request)
     {
         try {
+            $resources = $this->userResources->profileImageUpdate();
             $user = $this->userService->setModel($request->user())->createMedia(
                 file: $request->file('image'),
                 collection: MediaCollection::IMAGE,
                 disk: MediaDisk::USERS,
             )->getModel(
                 asResource: true,
-                attributes: config('callmeaf-user.resources.profile_image_update.attributes'),
-                relations: config('callmeaf-user.resources.profile_image_update.relations'),
+                attributes: $resources->attributes(),
+                relations: $resources->relations(),
                 events: [
                     UserProfileImageUpdated::class,
                 ],

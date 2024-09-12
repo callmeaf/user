@@ -42,7 +42,7 @@ class UserResource extends JsonResource
             'deleted_at_text' => fn() => $this->deletedAtText,
             'image' => fn() => $this->image ? new (config('callmeaf-media.model_resource'))($this->image,only: $this->only['!image'] ?? []) : null,
             'roles_ids' => fn() => $this->roles()->pluck('id'),
-            'roles' => fn() => $this->roles->count() ? new (config('callmeaf-role.model_resource_collection'))($this->roles,only: $this->only['!roles'] ?? []) : null,
+            'roles' => fn() => $this->roles?->count() ? new (config('callmeaf-role.model_resource_collection'))($this->roles,only: $this->only['!roles'] ?? []) : null,
         ],only: $this->only);
     }
 }
