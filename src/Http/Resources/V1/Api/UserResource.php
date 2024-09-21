@@ -6,6 +6,7 @@ use Callmeaf\Media\Http\Resources\V1\Api\MediaResource;
 use Callmeaf\Permission\Http\Resources\V1\Api\RoleCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class UserResource extends JsonResource
 {
@@ -21,6 +22,7 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        Log::alert(json_encode($this->only));
         return toArrayResource(data: [
             'id' => fn() => $this->id,
             'status' => fn() => $this->status,
@@ -43,6 +45,7 @@ class UserResource extends JsonResource
             'image' => fn() => $this->image ? new (config('callmeaf-media.model_resource'))($this->image,only: $this->only['!image'] ?? []) : null,
             'roles_ids' => fn() => $this->roles()->pluck('id'),
             'roles' => fn() => $this->roles?->count() ? new (config('callmeaf-role.model_resource_collection'))($this->roles,only: $this->only['!roles'] ?? []) : null,
+            'carts' => fn() => $this->carts?->count() ? new (config('callmeaf-cart.model_resource_collection'))($this->carts,only: $this->only['!carts'] ?? []) : null,
         ],only: $this->only);
     }
 }

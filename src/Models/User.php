@@ -3,6 +3,8 @@
 namespace Callmeaf\User\Models;
 
 use Callmeaf\Base\Contracts\HasResponseTitles;
+use Callmeaf\Base\Enums\ResponseTitle;
+use Callmeaf\Base\Traits\HasCarts;
 use Callmeaf\Base\Traits\HasMediaMethod;
 use Callmeaf\Base\Traits\Localeable;
 use Callmeaf\Base\Traits\Metaable;
@@ -26,7 +28,19 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,HasResponseTitles
 {
-    use HasApiTokens, HasFactory, Notifiable,HasStatus,HasType,HasDate,HasMediaMethod,InteractsWithMedia,SoftDeletes,HasRoles,Localeable,Metaable;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasStatus,
+        HasType,
+        HasDate,
+        HasMediaMethod,
+        InteractsWithMedia,
+        SoftDeletes,
+        HasRoles,
+        Localeable,
+        Metaable,
+        HasCarts;
 
     protected $fillable = [
         'status',
@@ -63,7 +77,7 @@ class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,H
         $this->notify(new VerifyEmail());
     }
 
-    public function responseTitles(string $key,string $default = ''): string
+    public function responseTitles(ResponseTitle|string $key,string $default = ''): string
     {
         return [
             'store' => $this->fullName ?? $default,
@@ -73,7 +87,7 @@ class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,H
             'restore' => $this->fullName ?? $default,
             'force_destroy' => $this->fullName ?? $default,
             'sync_roles' => $this->fullName ?? $default,
-        ][$key];
+        ][$key instanceof ResponseTitle ? $key->value : $key];
     }
 
     public static function enumsLang(): array

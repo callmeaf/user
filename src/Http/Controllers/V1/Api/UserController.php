@@ -2,6 +2,7 @@
 
 namespace Callmeaf\User\Http\Controllers\V1\Api;
 
+use Callmeaf\Base\Enums\ResponseTitle;
 use Callmeaf\Base\Http\Controllers\V1\Api\ApiController;
 use Callmeaf\Media\Enums\MediaCollection;
 use Callmeaf\Media\Enums\MediaDisk;
@@ -29,7 +30,7 @@ use Callmeaf\User\Http\Requests\V1\Api\UserTrashedIndexRequest;
 use Callmeaf\User\Http\Requests\V1\Api\UserUpdateRequest;
 use Callmeaf\User\Models\User;
 use Callmeaf\User\Services\V1\UserService;
-use Callmeaf\User\Utilities\V1\User\Api\UserResources;
+use Callmeaf\User\Utilities\V1\Api\User\UserResources;
 
 class UserController extends ApiController
 {
@@ -73,7 +74,7 @@ class UserController extends ApiController
             return apiResponse([
                 'user' => $user,
             ],__('callmeaf-base::v1.successful_created', [
-                'title' => $user->responseTitles('store'),
+                'title' => $user->responseTitles(ResponseTitle::STORE),
             ]));
         } catch (\Exception $exception) {
             report($exception);
@@ -112,7 +113,7 @@ class UserController extends ApiController
             return apiResponse([
                 'user' => $user,
             ],__('callmeaf-base::v1.successful_updated', [
-                'title' =>  $user->responseTitles('update')
+                'title' =>  $user->responseTitles(ResponseTitle::UPDATE)
             ]));
         } catch (\Exception $exception) {
             report($exception);
@@ -132,7 +133,7 @@ class UserController extends ApiController
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_updated', [
-                 'title' =>  $user->responseTitles('status_update')
+                 'title' =>  $user->responseTitles(ResponseTitle::STATUS_UPDATE)
              ]));
         } catch (\Exception $exception) {
             report($exception);
@@ -150,7 +151,7 @@ class UserController extends ApiController
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_deleted', [
-                 'title' =>  $user->responseTitles('destroy')
+                 'title' =>  $user->responseTitles(ResponseTitle::DESTROY)
              ]));
         } catch (\Exception $exception) {
             report($exception);
@@ -169,7 +170,7 @@ class UserController extends ApiController
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_restored',[
-                 'title' =>  $user->responseTitles('restore')
+                 'title' =>  $user->responseTitles(ResponseTitle::RESTORE)
              ]));
         } catch (\Exception $exception) {
             report($exception);
@@ -208,7 +209,7 @@ class UserController extends ApiController
              return apiResponse([
                  'user' => $user,
              ],__('callmeaf-base::v1.successful_force_destroyed',[
-                 'title' =>  $user->responseTitles('force_destroy')
+                 'title' =>  $user->responseTitles(ResponseTitle::FORCE_DESTROY)
              ]));
         } catch (\Exception $exception) {
             report($exception);

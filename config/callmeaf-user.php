@@ -46,22 +46,22 @@ return [
         ],
     ],
     'validations' => [
-        'user' => \Callmeaf\User\Utilities\V1\User\Api\UserFormRequestValidator::class,
+        'user' => \Callmeaf\User\Utilities\V1\Api\User\UserFormRequestValidator::class,
 
     ],
     'resources' => [
-       'user' => \Callmeaf\User\Utilities\V1\User\Api\UserResources::class,
+       'user' => \Callmeaf\User\Utilities\V1\Api\User\UserResources::class,
     ],
     'controllers' => [
         'users' => \Callmeaf\User\Http\Controllers\V1\Api\UserController::class,
     ],
     'form_request_authorizers' => [
-        'user' => \Callmeaf\User\Utilities\V1\User\Api\UserFormRequestAuthorizer::class,
+        'user' => \Callmeaf\User\Utilities\V1\Api\User\UserFormRequestAuthorizer::class,
     ],
     'middlewares' => [
-        'user' => \Callmeaf\User\Utilities\V1\User\Api\UserControllerMiddleware::class,
+        'user' => \Callmeaf\User\Utilities\V1\Api\User\UserControllerMiddleware::class,
     ],
-    'searcher' => \Callmeaf\User\Utilities\V1\User\Api\UserSearcher::class,
+    'searcher' => \Callmeaf\User\Utilities\V1\Api\User\UserSearcher::class,
     'seeders' => [
         \Callmeaf\User\Seeders\UserSeeder::class,
     ],
