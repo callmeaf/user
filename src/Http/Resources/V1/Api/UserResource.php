@@ -22,7 +22,6 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        Log::alert(json_encode($this->only));
         return toArrayResource(data: [
             'id' => fn() => $this->id,
             'status' => fn() => $this->status,
