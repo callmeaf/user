@@ -38,6 +38,10 @@ class UserCollection extends ResourceCollection
                 'updated_at_text' => fn() => $user->updatedAtText,
                 'deleted_at' => fn() => $user->deleted_at,
                 'deleted_at_text' => fn() => $user->deletedAtText,
+                'image' => fn() => $user->image ? new (config('callmeaf-media.model_resource'))($user->image,only: $this->only['!image'] ?? []) : null,
+                'roles_ids' => fn() => $user->roles()->pluck('id'),
+                'roles' => fn() => $user->roles?->count() ? new (config('callmeaf-role.model_resource_collection'))($user->roles,only: $this->only['!roles'] ?? []) : null,
+                'carts' => fn() => $user->carts?->count() ? new (config('callmeaf-cart.model_resource_collection'))($user->carts,only: $this->only['!carts'] ?? []) : null,
             ],only: $this->only)),
         ];
     }

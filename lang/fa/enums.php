@@ -7,6 +7,7 @@ return [
     UserStatus::class => [
         UserStatus::ACTIVE->name => 'فعال',
         UserStatus::INACTIVE->name => 'غیر فعال',
+        UserStatus::PENDING->name => 'در انتظار تایید',
     ],
     UserType::class => [
         UserType::NORMAL->name => 'معمولی',

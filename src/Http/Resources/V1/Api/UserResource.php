@@ -2,11 +2,8 @@
 
 namespace Callmeaf\User\Http\Resources\V1\Api;
 
-use Callmeaf\Media\Http\Resources\V1\Api\MediaResource;
-use Callmeaf\Permission\Http\Resources\V1\Api\RoleCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Log;
 
 class UserResource extends JsonResource
 {
