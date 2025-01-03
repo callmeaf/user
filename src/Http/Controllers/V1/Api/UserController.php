@@ -43,6 +43,11 @@ class UserController extends ApiController
         $this->userResources = app(config('callmeaf-user.resources.user'));
     }
 
+    public static function middleware(): array
+    {
+        return app(config('callmeaf-user.middlewares.user'))();
+    }
+
     public function index(UserIndexRequest $request)
     {
         try {
