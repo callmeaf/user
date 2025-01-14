@@ -6,6 +6,7 @@ use Callmeaf\Auth\Notifications\V1\VerifyEmail;
 use Callmeaf\Base\Contracts\HasEnum;
 use Callmeaf\Base\Contracts\HasResponseTitles;
 use Callmeaf\Base\Enums\ResponseTitle;
+use Callmeaf\Base\Traits\HasAddresses;
 use Callmeaf\Base\Traits\HasCarts;
 use Callmeaf\Base\Traits\HasDate;
 use Callmeaf\Base\Traits\HasMediaMethod;
@@ -40,7 +41,8 @@ class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,H
         HasRoles,
         Localeable,
         Metaable,
-        HasCarts;
+        HasCarts,
+        HasAddresses;
 
     protected $fillable = [
         'status',
