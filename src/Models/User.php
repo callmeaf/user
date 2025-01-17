@@ -39,7 +39,6 @@ class User extends Authenticatable implements HasEnum,MustVerifyEmail,HasMedia,H
         InteractsWithMedia,
         SoftDeletes,
         HasRoles,
-        Localeable,
         Metaable,
         HasCarts,
         HasAddresses;

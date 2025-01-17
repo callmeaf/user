@@ -25,7 +25,6 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        logger($this->route('user'));
         $userId = $this->route('user')->id;
         return validationManager(rules: [
             'status' => [new Enum(UserStatus::class)],
