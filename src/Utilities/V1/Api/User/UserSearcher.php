@@ -10,17 +10,22 @@ class UserSearcher implements SearcherInterface
     public function apply(Builder $query, array $filters = []): void
     {
         $filters = collect($filters)->filter(fn($item) => strlen(trim($item)));
-        if($value = $filters->get('mobile')) {
-            $query->where('mobile','like',searcherLikeValue($value));
-        }
-        if($value = $filters->get('email')) {
-            $query->where('email','like',searcherLikeValue($value));
-        }
-        if($value = $filters->get('first_name')) {
-            $query->where('first_name','like',searcherLikeValue($value));
-        }
-        if($value = $filters->get('last_name')) {
-            $query->where('last_name','like',searcherLikeValue($value));
-        }
+        $query->where(function(Builder $builder) use ($filters) {
+            $searcherSubClassQueryFunction = config('callmeaf-base.searcher_subclass_query_function');
+
+            if($value = $filters->get('mobile')) {
+                $builder->{$searcherSubClassQueryFunction}('mobile','like',searcherLikeValue($value));
+            }
+            if($value = $filters->get('email')) {
+                $builder->{$searcherSubClassQueryFunction}('email','like',searcherLikeValue($value));
+            }
+            if($value = $filters->get('first_name')) {
+                $builder->{$searcherSubClassQueryFunction}('first_name','like',searcherLikeValue($value));
+            }
+            if($value = $filters->get('last_name')) {
+                $builder->{$searcherSubClassQueryFunction}('last_name','like',searcherLikeValue($value));
+            }
+        });
+
     }
 }

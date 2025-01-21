@@ -30,6 +30,7 @@ class UserCollection extends ResourceCollection
                 'email' => fn() => $user->email,
                 'first_name' => fn() => $user->first_name,
                 'last_name' => fn() => $user->last_name,
+                'full_name' => fn() => $user->fullName,
                 'national_code' => fn() => $user->national_code,
                 'email_verified_at' => fn() => $user->email_verified_at,
                 'created_at' => fn() => $user->created_at,
