@@ -37,12 +37,13 @@ class UserFormRequestValidator extends FormRequestValidator
     public function update(): array
     {
         return [
-            'status' => false,
-            'type' => false,
+            'status' => true,
+            'type' => true,
+            'mobile' => true,
             'email' => false,
-            'first_name' => false,
-            'last_name' => false,
-            'national_code' => false,
+            'first_name' => true,
+            'last_name' => true,
+            'national_code' => true,
         ];
     }
     public function statusUpdate(): array
