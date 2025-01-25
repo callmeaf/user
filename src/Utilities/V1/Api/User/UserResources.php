@@ -212,6 +212,7 @@ class UserResources extends Resources
                 'email',
                 'first_name',
                 'last_name',
+                'full_name',
                 'created_at_text',
                 'updated_at_text',
                 'deleted_at',

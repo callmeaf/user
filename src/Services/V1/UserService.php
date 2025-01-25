@@ -38,4 +38,5 @@ class UserService extends BaseService implements UserServiceInterface
         $this->freshModel();
         return $this;
     }
+
 }

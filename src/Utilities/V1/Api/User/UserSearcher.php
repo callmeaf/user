@@ -19,6 +19,9 @@ class UserSearcher implements SearcherInterface
             if($value = $filters->get('email')) {
                 $builder->{$searcherSubClassQueryFunction}('email','like',searcherLikeValue($value));
             }
+            if($value = $filters->get('national_code')) {
+                $builder->{$searcherSubClassQueryFunction}('national_code','like',searcherLikeValue($value));
+            }
             if($value = $filters->get('first_name')) {
                 $builder->{$searcherSubClassQueryFunction}('first_name','like',searcherLikeValue($value));
             }
