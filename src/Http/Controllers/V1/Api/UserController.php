@@ -245,11 +245,11 @@ class UserController extends ApiController
         }
     }
 
-    public function profileImageUpdate(UserProfileImageUpdateRequest $request)
+    public function profileImageUpdate(UserProfileImageUpdateRequest $request,User $user)
     {
         try {
             $resources = $this->userResources->profileImageUpdate();
-            $user = $this->userService->setModel($request->user())->createMedia(
+            $user = $this->userService->setModel($user)->createMedia(
                 file: $request->file('image'),
                 collection: MediaCollection::IMAGE,
                 disk: MediaDisk::USERS,

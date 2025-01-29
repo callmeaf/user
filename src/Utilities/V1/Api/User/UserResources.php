@@ -64,7 +64,9 @@ class UserResources extends Resources
     public function show(): self
     {
         $this->data = [
-            'relations' => [],
+            'relations' => [
+                "roles"
+            ],
             'attributes' => [
                 'id',
                 'type',
@@ -76,6 +78,19 @@ class UserResources extends Resources
                 'first_name',
                 'last_name',
                 'national_code',
+                'image',
+                '!image' => [
+                    'id',
+                    'file_name',
+                    'collection_name',
+                    'size',
+                    'url',
+                ],
+                'roles',
+                '!roles' => [
+                    'id',
+                    'full_name'
+                ],
                 'created_at_text',
                 'updated_at_text',
             ],
