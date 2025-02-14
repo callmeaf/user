@@ -39,7 +39,6 @@ class UserResource extends JsonResource
             'deleted_at' => fn() => $this->deleted_at,
             'deleted_at_text' => fn() => $this->deletedAtText,
             'image' => fn() => $this->image ? new (config('callmeaf-media.model_resource'))($this->image,only: $this->only['!image'] ?? []) : null,
-            'roles_ids' => fn() => $this->roles()->pluck('id'),
             'roles' => fn() => $this->roles?->count() ? new (config('callmeaf-role.model_resource_collection'))($this->roles,only: $this->only['!roles'] ?? []) : null,
             'carts' => fn() => $this->carts?->count() ? new (config('callmeaf-cart.model_resource_collection'))($this->carts,only: $this->only['!carts'] ?? []) : null,
         ],only: $this->only);
