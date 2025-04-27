@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('first_name')->nullable()->after('name');
             $table->string('last_name')->nullable()->after('first_name');
             $table->string('mobile')->nullable()->unique()->index()->after('last_name');
+            $table->boolean('accepted_terms')->default(false)->after('remember_token');
             $table->softDeletes()->after('remember_token');
 
             $table->string('email')->nullable()->change();
@@ -37,6 +38,7 @@ return new class extends Migration {
                 'first_name',
                 'last_name',
                 'mobile',
+                'accepted_terms',
                 'deleted_at',
             ];
             foreach ($addedColumns as $addedColumn) {
