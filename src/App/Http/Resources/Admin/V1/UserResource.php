@@ -3,6 +3,7 @@
 namespace Callmeaf\User\App\Http\Resources\Admin\V1;
 
 use App\Models\User;
+use Callmeaf\Media\App\Repo\Contracts\MediaRepoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,10 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        /**
+         * @var MediaRepoInterface $mediaRepo
+         */
+        $mediaRepo = app(MediaRepoInterface::class);
         return [
             'id' => $this->id,
             'status' => $this->status,
@@ -34,6 +39,7 @@ class UserResource extends JsonResource
             'updated_at_text' => $this->updatedAtText(),
             'deleted_at' => $this->deleted_at,
             'deleted_at_text' => $this->deletedAtText(),
+            'image' => $mediaRepo->toResource($this->whenLoaded('image')),
         ];
     }
 }

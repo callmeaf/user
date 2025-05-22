@@ -4,7 +4,7 @@ use Callmeaf\Base\App\Enums\RequestType;
 
 return [
     'model' => \App\Models\User::class,
-    'route_key_name' => 'mobile',
+    'route_key_name' => 'email',
     'repo' => \Callmeaf\User\App\Repo\V1\UserRepo::class,
     'resources' => [
         RequestType::API->value => [
