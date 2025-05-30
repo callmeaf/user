@@ -119,4 +119,9 @@ class UserController extends AdminController implements HasMiddleware
             'success' => $importer->getSuccess(),
         ]);
     }
+
+    public function syncRoles(string $id)
+    {
+        return $this->userRepo->syncRoles(id: $id,rolesIds: $this->request->get('roles_ids') ?? []);
+    }
 }

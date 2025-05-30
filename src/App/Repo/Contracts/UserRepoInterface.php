@@ -18,4 +18,11 @@ interface UserRepoInterface extends BaseRepoInterface
      * @return UserResource
      */
     public function updatePassword(string $id, string $password);
+
+    /**
+     * @param string $id
+     * @param array $rolesIds
+     * @return UserResource
+     */
+    public function syncRoles(string $id,array $rolesIds);
 }

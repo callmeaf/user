@@ -4,6 +4,7 @@ namespace Callmeaf\User\App\Http\Resources\Admin\V1;
 
 use App\Models\User;
 use Callmeaf\Media\App\Repo\Contracts\MediaRepoInterface;
+use Callmeaf\Role\App\Repo\Contracts\RoleRepoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,6 +24,10 @@ class UserResource extends JsonResource
          * @var MediaRepoInterface $mediaRepo
          */
         $mediaRepo = app(MediaRepoInterface::class);
+        /**
+         * @var RoleRepoInterface $roleRepo
+         */
+        $roleRepo = app(RoleRepoInterface::class);
         return [
             'id' => $this->id,
             'status' => $this->status,
@@ -40,6 +45,7 @@ class UserResource extends JsonResource
             'deleted_at' => $this->deleted_at,
             'deleted_at_text' => $this->deletedAtText(),
             'image' => $mediaRepo->toResource($this->whenLoaded('image')),
+            'roles' => $roleRepo->toResourceCollection($this->whenLoaded('roles')),
         ];
     }
 }

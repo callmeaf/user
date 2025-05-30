@@ -3,6 +3,7 @@
 namespace Callmeaf\User\App\Repo\V1;
 
 use Callmeaf\Base\App\Repo\V1\BaseRepo;
+use Callmeaf\User\App\Http\Resources\Admin\V1\UserResource;
 use Callmeaf\User\App\Repo\Contracts\UserRepoInterface;
 
 class UserRepo extends BaseRepo implements UserRepoInterface
@@ -12,5 +13,19 @@ class UserRepo extends BaseRepo implements UserRepoInterface
         return $this->update($id, [
             'password' => $password,
         ]);
+    }
+
+    public function syncRoles(string $id, array $rolesIds)
+    {
+        /**
+         * @var UserResource $user
+         */
+        $user = $this->findById($id);
+
+        $user->resource->roles()->sync($rolesIds);
+
+        $user->resource->loadMissing(['roles']);
+
+        return $user;
     }
 }
