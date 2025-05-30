@@ -6,6 +6,7 @@ use Callmeaf\Base\App\Enums\ExportType;
 use Callmeaf\Base\App\Enums\ImportType;
 use Callmeaf\Base\App\Http\Controllers\Admin\V1\AdminController;
 use Callmeaf\User\App\Repo\Contracts\UserRepoInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
@@ -48,7 +49,7 @@ class UserController extends AdminController implements HasMiddleware
      */
     public function show(string $id)
     {
-        return $this->userRepo->findById(value: $id);
+        return $this->userRepo->builder(fn(Builder $query) => $query->with(['roles']))->findById(value: $id);
     }
 
     /**
