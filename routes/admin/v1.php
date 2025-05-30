@@ -21,5 +21,6 @@ Route::prefix($prefix)->as($as)->middleware($middleware)->controller($controller
         Route::patch('/password', 'updatePassword');
         Route::patch('/status', 'updateStatus');
         Route::patch('/type', 'updateType');
+        Route::patch('/roles','syncRoles');
     });
 });
