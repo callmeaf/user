@@ -35,7 +35,7 @@ class UserRepo extends BaseRepo implements UserRepoInterface
                 continue;
             }
             $roleRepo->freshQuery();
-            $changes[$key] = $roleRepo->getQuery()->select(['id','name'])->whereIn('id',$values)->pluck('name')->toArray();
+            $changes[$key] = $roleRepo->getQuery()->select(['id','name','name_fa'])->whereIn('id',$values)->get()->map(fn($item) => $item->nameText)->toArray();
         }
 
         UserSyncedRoles::dispatch($user->resource,$changes['attached'],$changes['detached'],$changes['updated']);
