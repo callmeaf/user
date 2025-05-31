@@ -3,6 +3,7 @@
 namespace Callmeaf\User\App\Repo\V1;
 
 use Callmeaf\Base\App\Repo\V1\BaseRepo;
+use Callmeaf\Role\App\Repo\Contracts\RoleRepoInterface;
 use Callmeaf\User\App\Events\Admin\V1\UserSyncedRoles;
 use Callmeaf\User\App\Http\Resources\Admin\V1\UserResource;
 use Callmeaf\User\App\Repo\Contracts\UserRepoInterface;
@@ -26,6 +27,16 @@ class UserRepo extends BaseRepo implements UserRepoInterface
         $changes = $user->resource->roles()->sync($rolesIds);
 
         $user->resource->loadMissing(['roles']);
+
+        $roleRepo = app(RoleRepoInterface::class);
+
+        foreach ($changes as $key => $values) {
+            if(empty($values)) {
+                continue;
+            }
+            $roleRepo->freshQuery();
+            $changes[$key] = $roleRepo->getQuery()->select(['id','name'])->whereIn('id',$values)->pluck('name')->toArray();
+        }
 
         UserSyncedRoles::dispatch($user->resource,$changes['attached'],$changes['detached'],$changes['updated']);
 
