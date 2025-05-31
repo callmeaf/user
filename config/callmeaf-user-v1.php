@@ -71,6 +71,9 @@ return [
             \Callmeaf\User\App\Events\Admin\V1\UserDeleted::class => [
                 // listeners
             ],
+            \Callmeaf\User\App\Events\Admin\V1\UserSyncedRoles::class => [
+
+            ],
         ],
     ],
     'requests' => [
