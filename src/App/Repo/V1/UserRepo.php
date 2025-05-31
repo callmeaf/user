@@ -27,7 +27,7 @@ class UserRepo extends BaseRepo implements UserRepoInterface
 
         $user->resource->loadMissing(['roles']);
 
-        UserSyncedRoles::dispatch($user,$changes['attached'],$changes['detached'],$changes['updated']);
+        UserSyncedRoles::dispatch($user->resource,$changes['attached'],$changes['detached'],$changes['updated']);
 
         return $user;
     }
