@@ -72,7 +72,7 @@ return [
                 // listeners
             ],
             \Callmeaf\User\App\Events\Admin\V1\UserSyncedRoles::class => [
-
+                \Callmeaf\User\App\Listeners\Admin\V1\NotifyUserOfUpdatedRoles::class,
             ],
         ],
     ],
