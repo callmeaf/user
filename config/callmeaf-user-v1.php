@@ -107,6 +107,7 @@ return [
             'updateType' => \Callmeaf\User\App\Http\Requests\Admin\V1\UserUpdateTypeRequest::class,
             'export' => \Callmeaf\User\App\Http\Requests\Admin\V1\UserExportRequest::class,
             'import' => \Callmeaf\User\App\Http\Requests\Admin\V1\UserImportRequest::class,
+            "syncRoles" => \Callmeaf\User\App\Http\Requests\Admin\V1\UserSyncRolesRequest::class,
         ],
     ],
     'controllers' => [
