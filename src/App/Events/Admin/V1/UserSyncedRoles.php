@@ -16,9 +16,9 @@ class UserSyncedRoles
      * @param User $user
      * @param array $attachedRolesNames
      * @param array $detachedRolesNames
-     * @param array $updatedRolesName
+     * @param array $updatedRolesNames
      */
-    public function __construct(public User $user,public array $attachedRolesNames,public array $detachedRolesNames,public array $updatedRolesName)
+    public function __construct(public User $user,public array $attachedRolesNames,public array $detachedRolesNames,public array $updatedRolesNames)
     {
         //
     }

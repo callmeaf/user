@@ -22,7 +22,7 @@ class NotifyUserOfUpdatedRoles
     {
         $attachedRolesNames = collect($event->attachedRolesNames);
         $detachedRolesNames = collect($event->detachedRolesNames);
-        $updatedRolesNames = collect($event->updatedRolesName);
+        $updatedRolesNames = collect($event->updatedRolesNames);
 
         if($attachedRolesNames->isEmpty() && $detachedRolesNames->isEmpty() && $updatedRolesNames->isEmpty()) {
             return;
